@@ -1,0 +1,19 @@
+[
+{
+  "directory": "F:/Repos/LDProtocol/build",
+  "command": "D:\\llvm-mingw\\bin\\clang++.exe    -g   -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\test\\main.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\test\\main.cc",
+  "file": "F:/Repos/LDProtocol/LDProtocol/test/main.cc"
+},
+
+{
+  "directory": "F:/Repos/LDProtocol/build",
+  "command": "D:\\llvm-mingw\\bin\\clang++.exe    -g   -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\utils\\cast.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\utils\\cast.cc",
+  "file": "F:/Repos/LDProtocol/LDProtocol/utils/cast.cc"
+},
+
+{
+  "directory": "F:/Repos/LDProtocol/build",
+  "command": "D:\\llvm-mingw\\bin\\clang++.exe    -g   -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\utils\\hexstring.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\utils\\hexstring.cc",
+  "file": "F:/Repos/LDProtocol/LDProtocol/utils/hexstring.cc"
+}
+]

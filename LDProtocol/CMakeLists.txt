@@ -3,7 +3,11 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
+LIST(APPEND SOURCES 
+	"test/main.cc"
+	"utils/cast.cc"
+	"utils/hexstring.cc"
+	)
 # 将源代码添加到此项目的可执行文件。
-add_executable (LDProtocol "LDProtocol.cpp" "LDProtocol.h")
-
-# TODO: 如有需要，请添加测试并安装目标。
+add_executable (LDProtocol ${SOURCES})
+SET_TARGET_PROPERTIES(LDProtocol PROPERTIES RUNTIME_OUTPUT_DIRECTORY "../build")
