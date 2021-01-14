@@ -1,6 +1,5 @@
 #include "hexstring.h"
 #include <string.h>
-#include <vcruntime.h>
 namespace ld {
 	HexString::HexString(const std::string & str):std::string(str) {
 		}

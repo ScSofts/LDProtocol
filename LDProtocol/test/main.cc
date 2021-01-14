@@ -13,8 +13,7 @@ struct Pack {
 int main(int argc, char *argv[]) {
 	
 	Pack p = {NetInt.LittleEidan.u8(1)};
-	ld::HexString hex("");
-	hex.append(p);
+	ld::HexString hex("00 ff");
 	std::cout << hex << std::endl;
 	system("pause");
 	return 0;

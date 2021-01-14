@@ -1,6 +1,7 @@
 #pragma once
 #include "../interface.h"
-#include <stdint.h>
+#include <cstdio>
+#include <cstdint>
 #include <string>
 #include <type_traits>
 #include <memory.h>
@@ -40,11 +41,16 @@ inline ld::HexString hex_cast(const T &structure){
 }
 
 template<>
+inline ld::HexString hex_cast(const ld::HexString &strings) {	
+	return strings;
+}
+
+template<>
 inline ld::HexString hex_cast(const std::string &strings) {
 	using ld::byte;
 	using ld::HexString;
 
-	auto size = strings.size();//sizeof strings to cast
+	auto size = strings.size();//sizeof string to cast
 
 	size_t tmp_length = size * 3 + 1;
 

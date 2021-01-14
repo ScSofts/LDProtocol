@@ -1,5 +1,5 @@
 #include "cast.h"
-#include <stdint.h>
+#include <cstdint>
 
 uint8_t uint_cast::to_le::u8(uint8_t original){
     //only one byte, just return it
