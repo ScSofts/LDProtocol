@@ -1,13 +1,23 @@
-﻿# CMakeList.txt: LDProtocol 的 CMake 项目，在此处包括源代码并定义
-# 项目特定的逻辑。
-#
+﻿set(PROJECT_NAME LDProtocol)
 cmake_minimum_required (VERSION 3.8)
 
 LIST(APPEND SOURCES 
 	"test/main.cc"
 	"utils/cast.cc"
 	"utils/hexstring.cc"
+	"utils/bin.cc"
+	"utils/exceptions.cc"
+	"crypto/ecdh.cc"
+	"crypto/md5.cc"
+	"crypto/tea.cc"
 	)
-# 将源代码添加到此项目的可执行文件。
-add_executable (LDProtocol ${SOURCES})
+	
+add_executable (
+	${PROJECT_NAME}
+	${SOURCES}
+)
+
+target_include_directories( ${PROJECT_NAME} PUBLIC ${openssl_SOURCE_DIR}/include)
+target_link_libraries( ${PROJECT_NAME} ssl crypto)
+
 SET_TARGET_PROPERTIES(LDProtocol PROPERTIES RUNTIME_OUTPUT_DIRECTORY "../build")

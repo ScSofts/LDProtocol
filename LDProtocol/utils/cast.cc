@@ -105,3 +105,84 @@ uint64_t uint_cast::to_be::u64(uint64_t original){
         ( (original & mask_8) << (8*7) )
     );
 }
+
+ld::Bin bin_cast(const ld::HexString &hex){
+    ld::Bin ret;
+    
+    std::string tmp = "";
+    std::string hex_copy = hex.data();
+    
+    hex_copy += " ";//fill in the missing space.
+
+    unsigned int tmp_byte;//unsigned int required,or warning for sscanf_s
+
+    for (auto current : hex_copy) {
+        if (!isblank(current) && current != '\r') {
+            tmp += current;
+        }
+        else
+            tmp = "";
+
+        if (tmp.size() == 2) {
+            sscanf_s(tmp.data(), "%02X", &tmp_byte);
+            ret.push_back((ld::byte)tmp_byte);
+        }
+    }
+    return ret;
+}
+
+template<>
+ ld::HexString hex_cast(const ld::HexString &strings)
+{	
+	return strings;
+}
+
+template<>
+ ld::HexString hex_cast(const ld::Bin &binary_set){
+	using ld::byte;
+	using ld::HexString;
+
+	auto size = binary_set.size();//sizeof binary set to cast
+
+	size_t tmp_length = size * 3 + 1;
+
+	char* buf = new char[tmp_length];
+	memset(buf, 0, tmp_length);
+	byte *t = (byte*)(binary_set.data());
+
+	for (auto i = 0u; i < size; i++)
+	{
+		sprintf_s(buf, tmp_length, "%s%02X ", buf, *(t + i));
+	}
+
+	buf[tmp_length - 1] = '\0';
+	HexString str = HexString(buf);
+	str.trim_end();
+	delete[] buf;
+	return str;
+}
+
+template<>
+ ld::HexString hex_cast(const std::string &strings) {
+	using ld::byte;
+	using ld::HexString;
+
+	auto size = strings.size();//sizeof string to cast
+
+	size_t tmp_length = size * 3 + 1;
+
+	char* buf = new char[tmp_length];
+	memset(buf, 0, tmp_length);
+	byte *t = (byte*)(strings.data());
+
+	for (auto i = 0u; i < size; i++)
+	{
+		sprintf_s(buf, tmp_length, "%s%02X ", buf, *(t + i));
+	}
+
+	buf[tmp_length - 1] = '\0';
+	HexString str = HexString(buf);
+	str.trim_end();
+	delete[] buf;
+	return str;
+}

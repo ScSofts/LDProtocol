@@ -7,8 +7,14 @@
 #include <memory.h>
 
 #pragma pack(1)
+namespace ld {
+	class Bin;
+	class HexString;
+}
+
+//cast struct to hex
 template<class T>
-inline ld::HexString hex_cast(const T &structure){
+ld::HexString hex_cast(const T &structure){
 	using ld::byte;
 	using ld::HexString;
 	
@@ -40,35 +46,18 @@ inline ld::HexString hex_cast(const T &structure){
 	return str;
 }
 
-template<>
-inline ld::HexString hex_cast(const ld::HexString &strings) {	
-	return strings;
-}
+//HexString donot need to encode  ( defined in cast.cc )
+template<>  ld::HexString hex_cast(const ld::HexString &strings);
 
-template<>
-inline ld::HexString hex_cast(const std::string &strings) {
-	using ld::byte;
-	using ld::HexString;
+//string to hex
+template<>  ld::HexString hex_cast(const std::string &strings);
 
-	auto size = strings.size();//sizeof string to cast
 
-	size_t tmp_length = size * 3 + 1;
+//cast to binary set ( defined in cast.cc )
+ld::Bin bin_cast(const ld::HexString & hex);
 
-	char* buf = new char[tmp_length];
-	memset(buf, 0, tmp_length);
-	byte *t = (byte*)(strings.data());
-
-	for (auto i = 0u; i < size; i++)
-	{
-		sprintf_s(buf, tmp_length, "%s%02X ", buf, *(t + i));
-	}
-
-	buf[tmp_length - 1] = '\0';
-	HexString str = HexString(buf);
-	str.trim_end();
-	delete[] buf;
-	return str;
-}
+//cast binary set to hex ( defined in cast.cc )
+template<>  ld::HexString hex_cast(const ld::Bin &binary_set);
 
 
 static class uint_cast{

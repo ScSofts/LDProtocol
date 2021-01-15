@@ -2,12 +2,12 @@
 #include <stdint.h>
 #include <string>
 
-
 namespace ld {
 	class HexString;
+	class Bin;
 }
 template<class T>
-inline ld::HexString hex_cast(const T &structure);
+ld::HexString hex_cast(const T &structure);
 
 namespace ld{
 	size_t ByteOffset(uint32_t bytes);
@@ -21,12 +21,14 @@ namespace ld{
 
 		template<class T>
 		inline void append(const T &structure){
-			(*this) += hex_cast(structure);
+			(*this) += " " + hex_cast(structure);
+			this->trim_end();
 		}
 
 		template<>
 		inline void append(const HexString &structure){
 			(*this) += " " + structure;
+			this->trim_end();
 		}
 
 		template<class T>
@@ -40,5 +42,14 @@ namespace ld{
 		}
 
 		void trim_end();
+
+		void tea_encrypt(const HexString & key);
+		void tea_encrypt(const Bin & key);
+
+		void tea_decrypt(const HexString &key);
+		void tea_decrypt(const Bin &key);
 	};
 };
+
+ ld::HexString operator ""_hex(const char* s,size_t ss);
+ std::string operator ""_str(const char *s,size_t ss);

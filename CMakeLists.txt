@@ -1,20 +1,21 @@
-﻿# CMakeList.txt: 顶层 CMake 项目文件，在此处执行全局配置
-# 并包含子项目。
-#
-cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.10)
 
 project ("LDProtocol")
 
-#检测VS
+# Compile flags
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	set(CMAKE_C_FLAGS_RELEASE "/MT")
 	set(CMAKE_C_FLAGS_DEBUG "/MTd")
 	set(CMAKE_GENERATOR_TOOLSET "v141_xp")
 else()
-	set(CMAKE_EXE_LINKER_FLAGS "-static")
-	set(CMAKE_LINK_LIBRARY_FLAG "-static")
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static ")
+	set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -static ")
+	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static ")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static ")
+	set(CMAKE_CXX_STANDARD 17)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static ")
 endif()
 
-
-# 包含子项目。
+add_subdirectory(third_party/openssl)
+set_target_properties(openssl PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD True)
 add_subdirectory ("LDProtocol")
