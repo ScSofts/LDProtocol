@@ -3,6 +3,8 @@
 #include <exception>
 #include <string.h>
 #include <string>
+#include "../crypto/md5.h"
+
 namespace ld {
 	HexString::HexString(const std::string & str):std::string(str) {
 		}
@@ -63,6 +65,10 @@ namespace ld {
 			throw TeaDecryptFailed(__FILE__,__LINE__);
 		}
 		this->std::string::operator=(hex_cast(bin));
+	}
+
+	HexString HexString::sum_md5(){
+		return hex_cast(MD5{}.sum(bin_cast(*this)));
 	}
 };
 

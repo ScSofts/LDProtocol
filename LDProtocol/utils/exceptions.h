@@ -1,5 +1,4 @@
 #pragma once
-#include "../interface.h"
 #include <cstddef>
 #include <exception>
 #include <stdint.h>
@@ -9,9 +8,17 @@ namespace ld{
     class TeaDecryptFailed:public std::exception{
     public:
         TeaDecryptFailed(const char* file ,const int32_t line);
-        TeaDecryptFailed(std::nullptr_t);
         virtual const char * what() const noexcept override;
     protected:
         std::string message;
+    };
+
+    class ECDHGenKeyFailed:public std::exception{
+    public:
+        ECDHGenKeyFailed(const char* file ,const int32_t line);
+        virtual const char * what() const noexcept override;
+    protected:
+        std::string message;
+    
     };
 };

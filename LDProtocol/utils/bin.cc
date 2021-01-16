@@ -1,7 +1,15 @@
+#include "../interface.h"
 #include "bin.h"
 #include "../crypto/tea.h"
+#include "../crypto/md5.h"
 #include <exception>
 namespace ld{
+
+    const Bin& Bin::operator=(const BinVec &vec){
+        this->std::vector<byte>::operator=(vec);
+        return *this;
+    }
+
     void Bin::tea_encrypt(const HexString & key){
         (*this) = Tea{}.Encryption(*this,bin_cast(key));
     }
@@ -24,5 +32,9 @@ namespace ld{
         }catch(std::exception e){
             throw TeaDecryptFailed(__FILE__,__LINE__);
         }
+    }
+
+    Bin Bin::sum_md5(){
+        return MD5{}.sum(*this);
     }
 };

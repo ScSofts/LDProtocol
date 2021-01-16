@@ -48,6 +48,8 @@ namespace ld{
 
 		void tea_decrypt(const HexString &key);
 		void tea_decrypt(const Bin &key);
+
+		HexString sum_md5();
 	};
 };
 

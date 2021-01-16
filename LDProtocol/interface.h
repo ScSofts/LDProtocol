@@ -8,7 +8,8 @@ namespace ld {
 	using byte = unsigned char;
 	using Json = nlohmann::json;
 };
+#include "utils/bin.h"
 #include "utils/hexstring.h"
 #include "utils/cast.h"
-#include "utils/bin.h"
 #include "utils/exceptions.h"
+#include "crypto/ecdh.h"

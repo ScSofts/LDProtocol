@@ -17,7 +17,7 @@ add_executable (
 	${SOURCES}
 )
 
-target_include_directories( ${PROJECT_NAME} PUBLIC ${openssl_SOURCE_DIR}/include)
+target_include_directories( ${PROJECT_NAME} PUBLIC ${openssl_SOURCE_DIR}/include ${openssl_BINARY_DIR}/include)
 target_link_libraries( ${PROJECT_NAME} ssl crypto)
 
 SET_TARGET_PROPERTIES(LDProtocol PROPERTIES RUNTIME_OUTPUT_DIRECTORY "../build")

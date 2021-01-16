@@ -1,3 +1,4 @@
+#include "../interface.h"
 #include "cast.h"
 #include <cstdint>
 

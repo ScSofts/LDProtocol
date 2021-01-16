@@ -1,6 +1,8 @@
 #pragma once
-#include "../interface.h"
 
 namespace ld{
-
+    class MD5{
+    public:
+        Bin sum(const Bin & data);    
+    };
 };
