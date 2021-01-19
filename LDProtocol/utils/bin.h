@@ -14,9 +14,25 @@ namespace ld {
 		void tea_decrypt(const HexString &key);
 		void tea_decrypt(const Bin &key);
 		Bin sum_md5();
+
 		template<class ToType>
 		const ToType &cast_to(){
 			return *reinterpret_cast<const ToType*>(this->data());
+		}
+
+		template<class ToType>
+		const ToType fetch(){
+			ToType tmp;
+			tmp = this->cast_to<ToType>();
+			this->erase(this->begin(),this->begin() + sizeof(ToType));
+			return tmp;
+		}
+
+		Bin fetch(size_t size){
+			Bin tmp = {};
+			tmp = BinVec{this->begin(),this->begin() + size};
+			this->erase(this->begin(),this->begin() + size);
+			return tmp;
 		}
 	};
 };
