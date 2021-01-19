@@ -21,4 +21,13 @@ namespace ld
     const char * ECDHGenKeyFailed::what()const noexcept{
         return message.data();
     }
+
+    MakeTLVFailed::MakeTLVFailed(const char* file ,const int32_t line):std::exception()
+    {
+        message = ("MakeTLVFailed Failed in" + std::string(file) + "," + std::to_string(line) + "!");
+    }
+
+    const char * MakeTLVFailed::what()const noexcept{
+        return message.data();
+    }
 }

@@ -21,4 +21,13 @@ namespace ld{
         std::string message;
     
     };
+
+    class MakeTLVFailed:public std::exception{
+    public:
+        MakeTLVFailed(const char* file ,const int32_t line);
+        virtual const char * what() const noexcept override;
+    protected:
+        std::string message;
+    
+    };
 };

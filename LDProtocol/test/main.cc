@@ -8,20 +8,16 @@
 
 int main(int argc, char *argv[]) {
 	using ld::byte;
-
+	using ld::MakeTLV;
+	using ld::HexString;
 	struct{
 		uint32_t size;
 		char name[256];
 	}head={
 		.name = "Hello World!"
 	};
-	head.size = NetInt.LittleEidan.u32(sizeof(head));
-	auto hex_head = hex_cast(head);
-	auto bin = bin_cast(hex_head);
-	// std::cout << hex_head << std::endl;
-	std::cout << 
-		bin.fetch<decltype(head)>().name 
-		<< std::endl << bin.size();
+	HexString tlv_101 = MakeTLV("01 01"_hex, head);
+	std::cout << tlv_101 << std::endl;
 	return 0;
 }
 #pragma pack()
