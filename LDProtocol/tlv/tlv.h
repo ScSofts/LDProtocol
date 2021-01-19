@@ -10,7 +10,7 @@ namespace ld {
             }
         #endif // DEBUG
         pack.append(name);
-        pack.append(sizeof(data));
+        pack.append(NetInt.LittleEidan.u16(sizeof(data)));
         pack.append(data);
         return pack;
     }

@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 	}head={
 		.name = "Hello World!"
 	};
+	head.size = NetInt.LittleEidan.u32(sizeof(head));
 	HexString tlv_101 = MakeTLV("01 01"_hex, head);
 	std::cout << tlv_101 << std::endl;
 	return 0;
