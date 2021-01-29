@@ -10,7 +10,7 @@ namespace ld{
         _841
     };
     KeyGroup MakeECDH(ECDHVersion version);
-    Bin RemakeECDH(
+    Bin RemakeECDH(ECDHVersion version,
         const Bin & peer_raw_pub_key,
         const Bin & pub_key,
         const Bin & pri_key);

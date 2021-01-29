@@ -1,5 +1,6 @@
 #include "../interface.h"
 #include "ecdh.h"
+#include "openssl/ec.h"
 #include <functional>
 #include <openssl/ecdh.h>
 namespace ld
@@ -190,11 +191,10 @@ namespace ld
         should_clean = false;
     }
 
-    Bin RemakeECDH(
-        const Bin & peer_raw_pub_key,
+    static Bin RemakeECDH_839(const Bin & peer_raw_pub_key,
         const Bin & pub_key,
         const Bin & pri_key){
-            auto ec_key = EC_KEY_new_by_curve_name(711);
+         auto ec_key = EC_KEY_new_by_curve_name(711);
             auto pri_key_bn = BN_mpi2bn (pri_key.data(),pri_key.size(), nullptr);
             auto ret = EC_KEY_set_private_key (ec_key, pri_key_bn);
             BN_free (pri_key_bn);
@@ -220,6 +220,48 @@ namespace ld
             EC_KEY_free(ec_key);
             
             return share_key.sum_md5();
-        }
+    }
+
+    static Bin RemakeECDH_841(const Bin & peer_raw_pub_key,
+        const Bin & pub_key,
+        const Bin & pri_key){
+            Bin tmp{};
+            tmp.reserve(16);
+            auto ec_key = EC_KEY_new_by_curve_name(415);
+            if(ec_key == nullptr){
+                return {};
+            }
+            
+            auto bn = BN_new();
+            BN_mpi2bn (pri_key.data(), pri_key.size(), bn);
+            EC_KEY_set_private_key(ec_key, bn);
+            BN_free (bn);
+            
+            auto ec_group = EC_KEY_get0_group (ec_key);
+            
+            auto ec_point = EC_POINT_new(ec_group);
+            
+            EC_POINT_oct2point(ec_group, ec_point, peer_raw_pub_key.data(), peer_raw_pub_key.size(), nullptr);
+            ECDH_compute_key (tmp.data(), 16, ec_point, ec_key, nullptr);
+            
+            EC_POINT_free(ec_point);
+            EC_KEY_free(ec_key);
+
+            return tmp.sum_md5();
+    }
+
+    Bin RemakeECDH(ECDHVersion version,
+        const Bin & peer_raw_pub_key,
+        const Bin & pub_key,
+        const Bin & pri_key){
+           switch (version) {
+                case ECDHVersion::_839:
+                    return RemakeECDH_839(peer_raw_pub_key, pub_key, pri_key);
+                    break;
+                case ECDHVersion::_841:
+                    return RemakeECDH_841(peer_raw_pub_key, pub_key, pri_key);
+                    break;
+           }
+    }
  
 };
