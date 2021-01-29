@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 namespace ld {
 	using BinVec = std::vector<byte>;
 	class HexString;
@@ -7,6 +8,9 @@ namespace ld {
 
 	class Bin :public std::vector<byte> {
 	public:
+		Bin(const BinVec &vec):std::vector<byte>(vec){}
+		Bin():std::vector<byte>(){}
+		
 		const Bin& operator =(const BinVec&);
 		void tea_encrypt(const HexString & key);
 		void tea_encrypt(const Bin & key);

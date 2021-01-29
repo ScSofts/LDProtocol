@@ -1,13 +1,16 @@
 #include "../interface.h"
 #include "hexstring.h"
 #include <exception>
+#include <stdint.h>
 #include <string.h>
 #include <string>
 #include "../crypto/md5.h"
 
 namespace ld {
 	HexString::HexString(const std::string & str):std::string(str) {
-		}
+		this->trim_start();
+		this->trim_end();
+	}
 
 	HexString::HexString(const HexString &str) : std::string(str) {
 
@@ -24,6 +27,12 @@ namespace ld {
 	void HexString::trim_end(){
 		auto i = this->end() - 1;
 		while ( isblank(*(i = this->end() - 1) )) {
+			erase(i);
+		}
+	}
+	void HexString::trim_start(){
+		auto i = this->begin();
+		while ( isblank(*(i = this->begin()) )) {
 			erase(i);
 		}
 	}
@@ -69,6 +78,18 @@ namespace ld {
 
 	HexString HexString::sum_md5(){
 		return hex_cast(MD5{}.sum(bin_cast(*this)));
+	}
+
+	size_t HexString::cout(){
+		return (*this + " ").length() / 3;
+	}
+
+	uint16_t HexString::toBigEidan(uint16_t u){
+		return NetInt.BigEidan.u16(u);
+	}
+
+	uint32_t HexString::toBigEidan32(uint32_t u){
+		return NetInt.BigEidan.u32(u);
 	}
 };
 

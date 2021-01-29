@@ -2,7 +2,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 LIST(APPEND SOURCES 
-	"test/main.cc"
+#	"test/main.cc"
 	"utils/cast.cc"
 	"utils/hexstring.cc"
 	"utils/bin.cc"
@@ -12,8 +12,10 @@ LIST(APPEND SOURCES
 	"crypto/tea.cc"
 	)
 	
-add_executable (
+#add_executable (
+add_library(
 	${PROJECT_NAME}
+	STATIC
 	${SOURCES}
 )
 

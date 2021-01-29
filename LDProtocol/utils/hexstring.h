@@ -19,17 +19,36 @@ namespace ld{
 		HexString(HexString &&);
 		~HexString();
 
+		size_t cout();
+
 		template<class T>
 		inline void append(const T &structure){
-			(*this) += " " + hex_cast(structure);
+			(*this) += (this->size() == 0 ? "" :" ") + hex_cast(structure);
 			this->trim_end();
 		}
 
 		template<>
 		inline void append(const HexString &structure){
-			(*this) += " " + structure;
+			(*this) += (this->size() == 0 ? "" :" ") + structure;
 			this->trim_end();
 		}
+
+		template<class T>
+		inline void appendLV(const T & any){
+			HexString hex = hex_cast(any);
+			const auto length = toBigEidan((uint16_t)hex.cout());
+			this->append((uint16_t)length);
+			this->append(hex);
+		}
+
+		template<class T>
+		inline void appendLLV(const T & any){
+			HexString hex = hex_cast(any);
+			const auto length = toBigEidan32((uint32_t)hex.cout());
+			this->append((uint32_t)length);
+			this->append(hex);
+		}
+
 
 		template<class T>
 		inline void insert(size_t offset,const T &structure){
@@ -42,6 +61,7 @@ namespace ld{
 		}
 
 		void trim_end();
+		void trim_start();
 
 		void tea_encrypt(const HexString & key);
 		void tea_encrypt(const Bin & key);
@@ -50,6 +70,9 @@ namespace ld{
 		void tea_decrypt(const Bin &key);
 
 		HexString sum_md5();
+	private:
+		uint16_t toBigEidan(uint16_t);
+		uint32_t toBigEidan32(uint32_t);
 	};
 };
 

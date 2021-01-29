@@ -4399,12 +4399,6 @@
 
 {
   "directory": "F:/Repos/LDProtocol/build",
-  "command": "D:\\llvm-mingw\\bin\\clang++.exe   -I../third_party/openssl/include -Ithird_party/openssl/include   -static  -g   -std=gnu++17 -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\test\\main.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\test\\main.cc",
-  "file": "F:/Repos/LDProtocol/LDProtocol/test/main.cc"
-},
-
-{
-  "directory": "F:/Repos/LDProtocol/build",
   "command": "D:\\llvm-mingw\\bin\\clang++.exe   -I../third_party/openssl/include -Ithird_party/openssl/include   -static  -g   -std=gnu++17 -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\utils\\cast.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\utils\\cast.cc",
   "file": "F:/Repos/LDProtocol/LDProtocol/utils/cast.cc"
 },
@@ -4443,5 +4437,11 @@
   "directory": "F:/Repos/LDProtocol/build",
   "command": "D:\\llvm-mingw\\bin\\clang++.exe   -I../third_party/openssl/include -Ithird_party/openssl/include   -static  -g   -std=gnu++17 -o LDProtocol\\CMakeFiles\\LDProtocol.dir\\crypto\\tea.cc.obj -c F:\\Repos\\LDProtocol\\LDProtocol\\crypto\\tea.cc",
   "file": "F:/Repos/LDProtocol/LDProtocol/crypto/tea.cc"
+},
+
+{
+  "directory": "F:/Repos/LDProtocol/build",
+  "command": "D:\\llvm-mingw\\bin\\clang++.exe   -I../LDProtocol -I../third_party/openssl/include -Ithird_party/openssl/include   -static  -g   -std=gnu++17 -o TProtocol\\CMakeFiles\\TProtocol.dir\\index.cc.obj -c F:\\Repos\\LDProtocol\\TProtocol\\index.cc",
+  "file": "F:/Repos/LDProtocol/TProtocol/index.cc"
 }
 ]
