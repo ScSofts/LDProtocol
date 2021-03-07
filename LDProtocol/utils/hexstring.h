@@ -1,11 +1,14 @@
 #pragma once
+#include <initializer_list>
 #include <stdint.h>
 #include <string>
+#include <functional>
 
 namespace ld {
 	class HexString;
 	class Bin;
 }
+
 template<class T>
 ld::HexString hex_cast(const T &structure);
 
@@ -48,6 +51,10 @@ namespace ld{
 			this->append((uint32_t)length);
 			this->append(hex);
 		}
+
+		void appendBatch(std::initializer_list<HexString> batch);
+
+		void write(std::function<void(HexString &pack)> writer);
 
 
 		template<class T>

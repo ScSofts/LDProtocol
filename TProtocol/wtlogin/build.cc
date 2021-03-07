@@ -1,7 +1,15 @@
 #include "index.h"
 #include <interface.h>
-#define LE NetInt.LittleEidan
-#define BE NetInt.BigEidan
+#include "./tlvs.hpp"
+#include "utils/hexstring.h"
+#include "utils/random.h"
+#include <ctime>
+#include <stdint.h>
+
+#ifndef LE
+    #define LE NetInt.LittleEidan
+    #define BE NetInt.BigEidan
+#endif
 
 namespace tlv {
 
@@ -89,8 +97,23 @@ static inline ld::HexString BuildLoginPackOutside(uint32_t uin, ld::HexString pa
 }
 
 static inline ld::HexString BuildLoginPackInside(uint32_t uin, ld::HexString passwordMD5, const ld::Bin &shareKey){
-    ld::HexString pack = ""_hex;
+    using ld::Random;
+    using tlv::MakeTLV;
+    using ld::HexString;
 
+    HexString pack = ""_hex;
+
+    HexString tlv001 = MakeTLV("00 01", [&](HexString &pack){
+        pack.append(Random::RandBin(4));
+        pack.append(uin);
+        pack.append<uint32_t>(_time32(nullptr));
+        pack.append("00 00 00 00 00 00"_hex);
+    });
+
+    pack.write([&](HexString &pack){
+        pack.appendBatch({tlv001})
+    });
+    
     pack.tea_encrypt(shareKey);
     return pack;
 }

@@ -210,6 +210,8 @@ namespace ld
                 nullptr);
             
             auto _pub_key = pub_key;
+            _pub_key.reserve(50 + 16);
+            
             auto v33 = ECDH_compute_key(_pub_key.data(), 24, share_key_bn, ec_key, nullptr);
             
             Bin share_key{};

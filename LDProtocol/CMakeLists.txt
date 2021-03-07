@@ -7,6 +7,7 @@ LIST(APPEND SOURCES
 	"utils/hexstring.cc"
 	"utils/bin.cc"
 	"utils/exceptions.cc"
+	"utils/random.cc"
 	"crypto/ecdh.cc"
 	"crypto/md5.cc"
 	"crypto/tea.cc"

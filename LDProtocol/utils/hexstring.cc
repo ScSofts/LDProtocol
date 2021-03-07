@@ -91,6 +91,16 @@ namespace ld {
 	uint32_t HexString::toBigEidan32(uint32_t u){
 		return NetInt.BigEidan.u32(u);
 	}
+
+	void HexString::write(std::function<void(HexString &pack)> writer){
+		writer(*this);
+	}
+
+	void HexString::appendBatch(std::initializer_list<HexString> batch){
+		for(auto i:batch){
+			this->append(i);
+		}
+	}
 };
 
  ld::HexString operator ""_hex(const char* s,size_t ss){

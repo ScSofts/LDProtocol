@@ -12,5 +12,6 @@ namespace ld {
 #include "utils/hexstring.h"
 #include "utils/cast.h"
 #include "utils/exceptions.h"
+#include "utils/random.h"
 #include "crypto/ecdh.h"
 #include "tlv/tlv.h"
