@@ -14,6 +14,10 @@
 #define BE NetInt.BigEidan
 #endif
 
+#ifndef FunctionShortCut
+#define FunctionShortCut static constexpr auto
+#endif
+
 namespace tlv {
 	class TLVs {
 	  public:
@@ -92,8 +96,8 @@ namespace tlv {
 
 		ld::HexString Tlv104(ld::HexString CodeToken1) {
 			return makeTLV("01 04", [&CodeToken1](ld::HexString &writer) {
-                writer.append(CodeToken1);
-            });
+				writer.append(CodeToken1);
+			});
 		}
 
 	  protected:
@@ -108,7 +112,7 @@ namespace tlv {
 		std::string imei;
 
 		ld::HexString _016A;
-		static constexpr auto makeTLV = ::tlv::MakeTLV;
+		FunctionShortCut makeTLV = ::tlv::MakeTLV;
 	};
 }; // namespace tlv
 
