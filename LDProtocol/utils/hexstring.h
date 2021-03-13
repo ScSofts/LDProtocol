@@ -77,6 +77,16 @@ namespace ld{
 		void tea_decrypt(const Bin &key);
 
 		HexString sum_md5();
+
+		ld::HexString &operator =(const std::string &str){
+			this->std::string::operator=(str);
+			return *this;
+		}
+
+		ld::HexString &operator =(const ld::HexString &str){
+			this->std::string::operator=(str);
+			return *this;
+		}
 	private:
 		uint16_t toBigEidan(uint16_t);
 		uint32_t toBigEidan32(uint32_t);

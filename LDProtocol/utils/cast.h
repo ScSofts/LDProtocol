@@ -36,7 +36,7 @@ ld::HexString hex_cast(const T &structure){
 
 	for (auto i = 0u; i < size; i++)
 	{
-		sprintf_s(buf, tmp_length, "%s%02X ", buf, *( t + i) );
+		sprintf_s(buf + (i *3) , tmp_length - (i * 3), "%02X " , *( t + i) );
 	}
 	
 	HexString str((std::string(buf)));
