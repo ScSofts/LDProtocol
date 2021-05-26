@@ -80,4 +80,7 @@ public:
 	}BigEidan;
 }NetInt;
 
+#define BE NetInt.BigEidan
+#define LE NetInt.LittleEidan
+
 #pragma pack()

@@ -3,8 +3,10 @@
 #include <random>
 
 namespace ld {
+    std::mt19937 *rander = nullptr;
     void Random::Init(){
-        rander = new std::mt19937();
+        if(!rander)
+            rander = new std::mt19937();
         rander->seed();
     }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <initializer_list>
 #include <vector>
 namespace ld {
 	using BinVec = std::vector<byte>;
@@ -9,18 +10,19 @@ namespace ld {
 	class Bin :public std::vector<byte> {
 	public:
 		Bin(const BinVec &vec):std::vector<byte>(vec){}
+		Bin(const std::initializer_list<byte> & bytes):std::vector<byte>(bytes){}
 		Bin():std::vector<byte>(){}
-		
+		Bin(size_t size):std::vector<byte>(size){}
 		const Bin& operator =(const BinVec&);
 		void tea_encrypt(const HexString & key);
 		void tea_encrypt(const Bin & key);
 
 		void tea_decrypt(const HexString &key);
 		void tea_decrypt(const Bin &key);
-		Bin sum_md5();
+		Bin sum_md5()const;
 
 		template<class ToType>
-		const ToType &cast_to(){
+		const ToType &cast_to()const{
 			return *reinterpret_cast<const ToType*>(this->data());
 		}
 

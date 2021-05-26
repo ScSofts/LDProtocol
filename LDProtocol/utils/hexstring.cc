@@ -101,6 +101,17 @@ namespace ld {
 			this->append(i);
 		}
 	}
+
+	void HexString::appendTLVMap(std::map<std::string,std::function<void(HexString &pack)>> tlvMap){
+		for(auto i:tlvMap){
+			write([&i](HexString & hex){
+				hex.append(hex_cast<HexString>(i.first));
+				ld::HexString body = ""_hex;
+				i.second(body);
+				hex.appendLV(body);
+			});
+		}
+	}
 };
 
  ld::HexString operator ""_hex(const char* s,size_t ss){

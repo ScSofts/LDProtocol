@@ -1,7 +1,7 @@
 #pragma once
 #include <random>
 namespace ld {
-    static std::mt19937 *rander;
+    extern std::mt19937 *rander;
     class Bin;
     class Random {
         public:

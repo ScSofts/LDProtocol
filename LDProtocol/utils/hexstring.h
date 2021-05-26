@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string>
 #include <functional>
+#include <map>
 
 namespace ld {
 	class HexString;
@@ -54,6 +55,12 @@ namespace ld{
 
 		void appendBatch(std::initializer_list<HexString> batch);
 
+		/**
+		 * @brief A quick way to write tlv
+		 * 
+		 * @param tlvMap 
+		 */
+		void appendTLVMap(std::map<std::string,std::function<void(HexString &pack)>> tlvMap);
 		void write(std::function<void(HexString &pack)> writer);
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 #include <string>
 #include <vector>
 #include <exception>
@@ -15,3 +16,10 @@ namespace ld {
 #include "utils/random.h"
 #include "crypto/ecdh.h"
 #include "tlv/tlv.h"
+
+namespace  {
+	using u8 = uint8_t;
+	using u16 = uint16_t;
+	using u32 = uint32_t;
+	using u64 = uint64_t;
+};
