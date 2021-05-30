@@ -34,7 +34,7 @@ namespace ld{
         }
     }
 
-    Bin Bin::sum_md5(){
+    Bin Bin::sum_md5()const{
         return MD5{}.sum(*this);
     }
 };

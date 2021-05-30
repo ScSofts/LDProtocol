@@ -114,6 +114,13 @@ struct IUserInfo{
     Apk apk = apks[0];
 
     Bin t0104 = {};
+    Bin t0174 = {};
+    HexString code;
+
+    Bin d2 = {};
+    u32 seq_id = 0;
+    Bin ticket = {};
+
     HexString password_md5 = ""_hex;
     string imei = "";
     Bin ksid = {};

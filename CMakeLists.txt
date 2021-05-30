@@ -17,6 +17,6 @@ else()
 endif()
 
 add_subdirectory(third_party/openssl)
-set_target_properties(openssl PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD True)
+option( WITH_APPS "Build applications" Off )
 add_subdirectory ("LDProtocol")
-add_subdirectory ("TProtocol")
+add_subdirectory ("OICQProtocol")

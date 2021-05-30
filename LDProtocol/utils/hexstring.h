@@ -48,7 +48,7 @@ namespace ld{
 		template<class T>
 		inline void appendLLV(const T & any){
 			HexString hex = hex_cast(any);
-			const auto length = toBigEidan32((uint32_t)hex.cout());
+			const auto length = toBigEidan32((uint32_t)hex.cout() + 4u);
 			this->append((uint32_t)length);
 			this->append(hex);
 		}
